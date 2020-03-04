@@ -16,7 +16,7 @@ The interface is:
 ```go
 type Store interface {
   Init(...Option)                          error
-  Options()                                *Options
+  Options()                                Options
   String()                                 string
   Read(key string, opts ...ReadOption)     ([]*Record, error)
   Write(*Record, opts ...WriteOption)      error
