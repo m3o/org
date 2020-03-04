@@ -4,8 +4,8 @@ Store is an abstraction for key-value storage.
 
 ## Overview
 
-For the majority of time microservices are considered stateless and storage is offloaded to a database 
-but considering we provide a framework storage and distributed storage needs to be a core concern.
+For the majority of time microservices are considered stateless and storage is offloaded to a database. 
+Considering that we provide a framework, storage and distributed storage needs to be a core concern.
 Micro provides a Store interface for key-value storage and a micro store service as the RPC layer 
 abstraction.
 
@@ -16,6 +16,7 @@ The interface is:
 ```go
 type Store interface {
   Init(...Option)                          error
+  Options()                                *Options
   String()                                 string
   Read(key string, opts ...ReadOption)     ([]*Record, error)
   Write(*Record, opts ...WriteOption)      error
@@ -61,6 +62,10 @@ For example, multiple tables in a SQL store.
 
 `Context` should contain all implementation specific options, using
 [`context.WithValue`](https://pkg.go.dev/context?tab=doc#WithValue) as a KV store.
+
+### Options
+
+`Options()` returns the current options
 
 ### String
 
