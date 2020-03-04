@@ -54,7 +54,7 @@ type Option func(o *Options)
 storage. For example, an etcd implementation would contain the nodes of the
 cluster. A SQL implementation could contain one or more connection strings.
 
-`Namespace` allows multiple isolated stores to be kept in one beacked, if supported.
+`Namespace` allows multiple isolated stores to be kept in one backend, if supported.
 For example, multiple tables in a SQL store.
 
 `Prefix` and `Suffix` set a global prefix/suffix on all keys.
