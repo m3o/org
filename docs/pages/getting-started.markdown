@@ -40,65 +40,6 @@ wget -q  https://raw.githubusercontent.com/micro/micro/master/scripts/install.sh
 powershell -Command "iwr -useb https://raw.githubusercontent.com/micro/micro/master/scripts/install.ps1 | iex"
 ```
 
-## Creating a service
-
-To create a new service, use the `micro new` command. It should output something reasonably similar to the following:
-
-```sh
-$ micro new helloworld
-Creating service go.micro.service.helloworld in helloworld
-
-.
-├── main.go
-├── generate.go
-├── plugin.go
-├── handler
-│   └── helloworld.go
-├── subscriber
-│   └── helloworld.go
-├── proto/helloworld
-│   └── helloworld.proto
-├── Dockerfile
-├── Makefile
-├── README.md
-├── .gitignore
-└── go.mod
-
-
-download protobuf for micro:
-
-brew install protobuf
-go get -u github.com/golang/protobuf/proto
-go get -u github.com/golang/protobuf/protoc-gen-go
-go get github.com/micro/micro/v2/cmd/protoc-gen-micro@master
-
-compile the proto file helloworld.proto:
-
-cd helloworld
-protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. proto/helloworld/helloworld.proto
-```
-
-As can be seen from the output above, before building the first service, the following tools must be installed:
-* [protoc](http://google.github.io/proto-lens/installing-protoc.html)
-* [protobuf/proto](github.com/golang/protobuf/protoc-gen-go)
-* [protoc-gen-micro](github.com/golang/protobuf/protoc-gen-go)
-
-They are all needed to translate proto files to actual Go code.
-Protos exist to provide a language agnostic way to describe service endpoints, their input and output types, and to have an efficient serialization format at hand.
-
-Currently Micro is  Go focused (apart from the [clients](#-from-other-languages) mentioned before), but this will change soon.
-
-So once all tools are installed, being inside the service root, we can issue the following command to generate the Go code from the protos:
-
-```
-protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. proto/helloworld/helloworld.proto
-```
-
-The generated code must be committed to source control, to enable other services to import the proto when making service calls (see previous section [Calling a service](#-calling-a-service).
-
-At this point, we know how to write a service, run it, and call other services too.
-We have everything at our fingertips, but there are still some missing pieces to write applications. One of such pieces is the store interface, which helps with persistent data storage even without a database.
-
 ## Running a service
 
 Before diving into writing a service, let's run an existing one, because it's just a few commands away!
@@ -165,49 +106,6 @@ Registry [service] Registering node: go.micro.service.helloworld-213b807a-15c2-4
 ```
 
 So since our service is running happily, let's try to call it! That's what services are for.
-
-## Updating a service
-
-Now since the example service is running (can be easily verified by `micro status`), we should not use `micro run`, but rather `micro update` to deploy it.
-
-We can simply issue the update command (remember to switch back to the root directory of the example service first)
-
-```
-micro update helloworld
-```
-
-And verify both with the micro server output:
-
-```
-Updating service example-service version latest source /home/username/example-service
-Processing update event example-service:latest in namespace default
-```
-
-and micro status:
-
-```
-$ micro status example-service
-NAME			VERSION	SOURCE							STATUS		BUILD	UPDATED		METADATA
-example-service	latest	/home/username/example-service	starting	n/a		10s ago		owner=n/a,group=n/a
-```
-
-that it was updated.
-
-If things for some reason go haywire, we can try the time tested "turning it off and on again" solution and do:
-
-```
-micro kill helloworld
-micro run helloworld
-```
-
-to start with a clean slate.
-
-So once we did update the example service, we should see the following in the logs:
-
-```
-$ micro logs example-service
-key: mykey, value: Hi there
-```
 
 ## Calling a service
 
@@ -304,6 +202,65 @@ Great! That response is coming straight from the helloworld service we started e
 ### From other languages
 
 In the [clients repo](https://github.com/micro/clients) there are Micro clients for various languages and frameworks. They are designed to connect easily to the live Micro environment or your local one, but more about environments later.
+
+## Creating a service
+
+To create a new service, use the `micro new` command. It should output something reasonably similar to the following:
+
+```sh
+$ micro new helloworld
+Creating service go.micro.service.helloworld in helloworld
+
+.
+├── main.go
+├── generate.go
+├── plugin.go
+├── handler
+│   └── helloworld.go
+├── subscriber
+│   └── helloworld.go
+├── proto/helloworld
+│   └── helloworld.proto
+├── Dockerfile
+├── Makefile
+├── README.md
+├── .gitignore
+└── go.mod
+
+
+download protobuf for micro:
+
+brew install protobuf
+go get -u github.com/golang/protobuf/proto
+go get -u github.com/golang/protobuf/protoc-gen-go
+go get github.com/micro/micro/v2/cmd/protoc-gen-micro@master
+
+compile the proto file helloworld.proto:
+
+cd helloworld
+protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. proto/helloworld/helloworld.proto
+```
+
+As can be seen from the output above, before building the first service, the following tools must be installed:
+* [protoc](http://google.github.io/proto-lens/installing-protoc.html)
+* [protobuf/proto](github.com/golang/protobuf/protoc-gen-go)
+* [protoc-gen-micro](github.com/golang/protobuf/protoc-gen-go)
+
+They are all needed to translate proto files to actual Go code.
+Protos exist to provide a language agnostic way to describe service endpoints, their input and output types, and to have an efficient serialization format at hand.
+
+Currently Micro is  Go focused (apart from the [clients](#-from-other-languages) mentioned before), but this will change soon.
+
+So once all tools are installed, being inside the service root, we can issue the following command to generate the Go code from the protos:
+
+```
+protoc --proto_path=.:$GOPATH/src --go_out=. --micro_out=. proto/helloworld/helloworld.proto
+```
+
+The generated code must be committed to source control, to enable other services to import the proto when making service calls (see previous section [Calling a service](#-calling-a-service).
+
+At this point, we know how to write a service, run it, and call other services too.
+We have everything at our fingertips, but there are still some missing pieces to write applications. One of such pieces is the store interface, which helps with persistent data storage even without a database.
 
 ## Storage
 
@@ -415,11 +372,48 @@ func main() {
 
 ```
 
-## Clients
+## Updating a service
 
-Beyond this we're working on multi-language clients which you can find and contribute to 
-on github at [github.com/micro/clients](https://github.com/micro/clients). We'd love to 
-discuss this further but it's not quite ready.
+Now since the example service is running (can be easily verified by `micro status`), we should not use `micro run`, but rather `micro update` to deploy it.
+
+We can simply issue the update command (remember to switch back to the root directory of the example service first)
+
+```
+micro update helloworld
+```
+
+And verify both with the micro server output:
+
+```
+Updating service example-service version latest source /home/username/example-service
+Processing update event example-service:latest in namespace default
+```
+
+and micro status:
+
+```
+$ micro status example-service
+NAME			VERSION	SOURCE							STATUS		BUILD	UPDATED		METADATA
+example-service	latest	/home/username/example-service	starting	n/a		10s ago		owner=n/a,group=n/a
+```
+
+that it was updated.
+
+If things for some reason go haywire, we can try the time tested "turning it off and on again" solution and do:
+
+```
+micro kill helloworld
+micro run helloworld
+```
+
+to start with a clean slate.
+
+So once we did update the example service, we should see the following in the logs:
+
+```
+$ micro logs example-service
+key: mykey, value: Hi there
+```
 
 ## Further reading
 

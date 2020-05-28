@@ -64,7 +64,7 @@ $(document).ready(function () {
           // add .active class to the current link
           $navigationLink.addClass("active");
           var hash = $navigationLink.selector.split("#")[1].slice(0, -1)
-          window.location.hash = hash;
+          history.replaceState(null, null, document.location.pathname + '#' + hash);
           //window.location.hash = (hash);
         }
         // we have found our section, so we return false to exit the each loop
