@@ -2,6 +2,7 @@ $(document).ready(function () {
   $(".navigation .navigation-list ul").addClass("navigation-list-child-list");
   // this waits until the document is fully loaded
   // Put custom logic here
+  $("li .active").addClass("original-active")
 
   // cache the navigation links
   var $navigationLinks = $(".navigation li > a");
@@ -64,8 +65,14 @@ $(document).ready(function () {
           // add .active class to the current link
           $navigationLink.addClass("active");
           var hash = $navigationLink.selector.split("#")[1].slice(0, -1)
-          history.replaceState(null, null, document.location.pathname + '#' + hash);
-          //window.location.hash = (hash);
+          if (hash == "table-of-contents") {
+            $(".original-active").addClass("active")
+          }
+          if (hash != "table-of-contents") {
+            history.replaceState(null, null, document.location.pathname + '#' + hash);
+          } else {
+            history.replaceState(null, null, document.location.pathname);
+          }
         }
         // we have found our section, so we return false to exit the each loop
         return false;
