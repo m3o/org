@@ -7,7 +7,7 @@ sidebar: home_sidebar
 toc_list: false
 nav_order: 1
 parent: Resources
-permalink: /tutorials
+permalink: /external-tutorials
 ---
 
 # Tutorials

@@ -24,7 +24,7 @@
                         {%- assign second_level_url = child.url | absolute_url -%}
                       {%- endif -%}
                       <a href="{{ child.url | absolute_url }}" class="navigation-list-link{% if page.url == child.url %} active{% endif %}">{{ child.title }}</a>
-                      {%- if child.toc_list -%}
+                      {%- if child.toc_list and (page.url == child.url or page.parent == child.title) -%}
                         {% include toc.html sanitize=true html=child.content class="navigation-list-child-list" item_class="navigation-list-item" anchor_class="navigation-list-link" %}
                       {%- endif -%}
                       {%- if child.has_children -%}
