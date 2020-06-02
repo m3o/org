@@ -455,28 +455,37 @@ $ micro config get key
 
 ### With the framework
 
+Micro configs work very similarly when being called from [Go code too](https://pkg.go.dev/github.com/micro/go-micro/v2/config?tab=doc):
+
 ```go
 package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
+	"time"
 
-	"github.com/micro/go-micro/v2/config"
+	"github.com/micro/go-micro/v2"
 )
 
 func main() {
-	// create a new config
-	c, err := config.NewConfig()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	// New Service
+	service := micro.NewService(
+		micro.Name("go.micro.service.config-read"),
+		micro.Version("latest"),
+	)
+	service.Init()
+	c := service.Options().Config
 
-	// set a value
-	c.Get("foo", "bar")
-
+	// read config value
+	fmt.Println("Value of key.subkey: ", c.Get("key", "subkey").String(""))
 }
+```
+
+Assuming the folder name for this service is still `example-service` (to update the existing service, [see updating a service](#-updating-a-service)):
+```
+$ micro logs example-service
+Value of key.subkey:  val
 ```
 
 ## Further reading
