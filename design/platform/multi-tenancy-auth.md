@@ -11,7 +11,7 @@ etcd registry implementation directly, a go-micro service would use the service 
 be responsible for authenticating an authorizing every request.
 
 micro has a package "internal/namespace" which provdies an Authorize method. This method takes a 
-context and namespace and returns an error if the context (or more specificall - the auth account 
+context and namespace and returns an error if the context (or more specifically - the auth account 
 embedded in the context) cannot access the given namespace. At present, anyone can access the 
 micro namespace in any model. For any non-micro namespace, the function will check to see if the
 callers account was issued by the namespace it's requesting. The function and an example useage are
