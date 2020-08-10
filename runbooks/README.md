@@ -127,7 +127,7 @@ kubectl exec -it cockroach-client -- ./cockroach sql --certs-dir=/certs --host=c
 When done with debugging
 
 ```
-kubectl delete -f ~/Desktop/cockroach.yml
+kubectl delete -f ~/cockroach.yml
 ```
 
 ## Running the go micro unit tests
