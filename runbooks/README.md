@@ -132,6 +132,8 @@ kubectl delete -f ~/Desktop/cockroach.yml
 
 ## Running the go micro unit tests
 
+By default the cockroach unit tests are simply skipped if there is no cockroach running. If you are hacking on the cockroach store code and want to run the tests locally, do the following:  
+
 Follow the simple installation instructions here: https://www.cockroachlabs.com/docs/stable/install-cockroachdb-linux.html
 
 Start cockroach by:
