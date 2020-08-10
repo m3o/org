@@ -15,11 +15,12 @@ Currently a single file but parts will be moved out once they become overly long
    * [Cockroach](#cockroach)
       * [Backups](#backups)
       * [Restore](#restore)
+      * [Connecting](#connecting)
+      * [Running the go micro unit tests](#running-the-go-micro-unit-tests)
    * [Testing Platform Resiliency](#testing-platform-resiliency)
       * [Killing all pods](#killing-all-pods)
    * [Regression Testing](#regression-testing)
       * [Manually](#manually)
-
 
 # Users
 
@@ -85,6 +86,59 @@ Our Kubernetes cluster has a cron job which will dump Cockroach and push to S3 e
 If you need to restore Cockroach from a backup you can do this by running the Kubernetes pod defined [here](https://github.com/m3o/services/tree/master/cockroachdb/restore) on a fresh Cockroach cluster. When the pod runs, it will download the latest dump file from S3 and apply to the cluster. Once complete, don't forget to delete the pod.
 1. `kubectl apply -f cockroach-restore.yaml`
 2. `kubectl delete po cockroach-restore`
+
+## Connecting
+
+Put this in a file:
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: default
+  name: cockroach-client
+spec:
+  containers:
+  - name: cockroach-client
+    image: cockroachdb/cockroach:v20.1.3
+    imagePullPolicy: IfNotPresent
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    volumeMounts:
+    - name: cockroachdb-debug-certs
+      mountPath: "/certs"
+  volumes:
+  - name: cockroachdb-debug-certs
+    secret:
+      secretName: cockroachdb-debug-certs
+      defaultMode: 0600     
+```
+
+Then (assuming the path of your file is `~cockroach/yml`)
+
+```
+kubectl create -f ~/cockroach.yml
+```
+
+```
+kubectl exec -it cockroach-client -- ./cockroach sql --certs-dir=/certs --host=cockroachdb-cluster
+```
+
+When done with debugging
+
+```
+kubectl delete -f ~/Desktop/cockroach.yml
+```
+
+## Running the go micro unit tests
+
+Follow the simple installation instructions here: https://www.cockroachlabs.com/docs/stable/install-cockroachdb-linux.html
+
+Start cockroach by:
+
+```
+cockroach start-single-node --insecure
+```
 
 # Testing Platform Resiliency
 
