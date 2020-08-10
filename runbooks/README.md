@@ -1,6 +1,12 @@
+# Runbooks
+
 This directory is a repository of runbooks for various parts of the M3O system and should act as an operations manual for things like outages etc.  
 Currently a single file but parts will be moved out once they become overly long. To regenerate the table of contents, use [this tool](https://github.com/ekalinin/github-markdown-toc) and do `cat ./README.md | gh-md-toc -`.
 
+# Table of Contents
+
+   * [Users](#users)
+   * [Add new user to beta](#add-new-user-to-beta)
    * [Services](#services)
       * [Redeploying services](#redeploying-services)
    * [Getting access](#getting-access)
@@ -11,6 +17,19 @@ Currently a single file but parts will be moved out once they become overly long
       * [Restore](#restore)
    * [Testing Platform Resiliency](#testing-platform-resiliency)
       * [Killing all pods](#killing-all-pods)
+   * [Regression Testing](#regression-testing)
+      * [Manually](#manually)
+
+
+# Users
+
+# Add new user to beta
+
+Users need to have their email added to the "allow" list of the invite service.
+
+```
+micro invite create --email="me@domwong.com"
+```
 
 # Services
 
@@ -84,3 +103,15 @@ Kill non core pods in the micro namespace to redeploy invite and other services:
 ```
 kubectl get pods -n micro | awk '{print $1}' | grep -v NAME | xargs -I % sh -c '{ kubectl delete pods % -n micro; sleep 120; }'
 ```
+
+# Regression Testing
+
+## Manually
+
+- Do full signup flow
+- Get github.com/micro/services/blog/posts running
+- Do some surface testing to ensure
+    - We’re not leaking creds
+    - We can’t see any store data that we shouldn’t be able to
+    - We can’t call any services we shouldn’t be able to
+    - We can’t see any bits of infra (etcd, cockroach, k8s) that we shouldn’t be able to
