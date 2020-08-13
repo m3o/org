@@ -4,12 +4,14 @@ This is the runbook for the M3O platform and should act as an operations manual 
 
 # Table of Contents
 
+  * [Platform Runbook](#platform-runbook)
+   * [Table of Contents](#table-of-contents)
    * [Users](#users)
    * [Add new user to beta](#add-new-user-to-beta)
    * [Services](#services)
       * [Redeploying services](#redeploying-services)
-         * [Micro](#micro-(server))
-         * [M3O](#m3o-(runtime-services))
+         * [Micro (Server)](#micro-server)
+         * [M3O (Runtime Services)](#m3o-runtime-services)
    * [Getting access](#getting-access)
       * [Scaleway](#scaleway)
       * [Kubernetes cluster](#kubernetes-cluster)
@@ -22,7 +24,15 @@ This is the runbook for the M3O platform and should act as an operations manual 
       * [Killing all pods](#killing-all-pods)
    * [Regression Testing](#regression-testing)
       * [Manually](#manually)
-   * [Deploying the Platform](#deploying-platform)
+      * [Prerequisites](#prerequisites)
+   * [Setup](#setup)
+      * [Create the cluster](#create-the-cluster)
+      * [Deploy the infra, certs and services](#deploy-the-infra-certs-and-services)
+      * [Remove default accounts](#remove-default-accounts)
+      * [Setup Stripe](#setup-stripe)
+      * [Set Config](#set-config)
+      * [Setup the rules](#setup-the-rules)
+      * [Run the M3O Services](#run-the-m3o-services)
 
 To regenerate the table of contents, use [this tool](https://github.com/ekalinin/github-markdown-toc) and do `cat ./platform.md | gh-md-toc -`.
 
@@ -196,15 +206,15 @@ Before deploying the platform you will need:
 - A Cloudflare API token, with access to m3o.com & m3o.app with Zone.Zone and Zone.DNS permissions.
 - The reference of the latest stable micro docker image snapshot.
 
-### Setup
+# Setup
 
-### Create the cluster
+## Create the cluster
 
 Create the cluster in Scaleway, running Kubernetes 1.18.6. The default pool should use the "GP1-S” tier which has 32GB of ram. Do not enable auto-scaling.
 
 Wait for the node pools to become Ready. Whilst you wait, download the Kubeconfig and set it locally `export KUBECONFIG=~/Download/micro-platform.yaml`
 
-### Deploy the infra, certs and services
+## Deploy the infra, certs and services
 
 Go to micro/micro/platform/kubernetes and run `bash install.sh production`. This script will install the certs, infra and all the micro services (e.g. runtime).
 
@@ -212,7 +222,7 @@ Once the script has finished, you need to manually add the cloud flare and slack
 
 Wait for all the pods to be “Running”.
 
-### Update micro to the latest snapshot
+## Update micro to the latest snapshot
 
 Update micro to the latest stable docker image snapshot using the following command and then wait for the services to all have the status "Running".
 
@@ -220,7 +230,7 @@ Update micro to the latest stable docker image snapshot using the following comm
 kubectl set image deployments micro=micro/micro:tag -l micro=runtime
 ```
 
-### Update DNS
+## Update DNS
 
 Update the DNS records in cloudflare to point to the k8s service Public IP for proxy and api. Once this is done, you should be able to call the service via the API and proxy using the following commands:
 
@@ -229,7 +239,7 @@ micro env set platform
 micro call store Debug.Health
 curl https://api.m3o.com/store/Debug/Health
 ```
-### Remove default accounts
+## Remove default accounts
 
 Firstly, login as admin:
 ```bash
@@ -256,7 +266,7 @@ micro auth delete account admin
 micro auth list accounts
 ```
 
-### Setup Stripe
+## Setup Stripe
 
 Create the product and plan in stripe. The response contains an ID, you'll need that for the next command so note it down.
 ```bash
@@ -276,7 +286,7 @@ curl https://api.stripe.com/v1/plans \
   -d product=[product id, created above]
 ```
 
-### Set Config
+## Set Config
 
 Set the required config. Replace the substituted values with the production API keys etc.
 ```bash
@@ -291,7 +301,7 @@ micro config set micro.status.services "api,auth,broker,config,network,proxy,reg
 
 Verify the config by calling`“micro config get micro`. This will output the config as JSON.
 
-### Setup the rules
+## Setup the rules
 
 Setup the auth rules to restrict access to the m3o services before we deploy them:
 ```bash
@@ -303,7 +313,7 @@ micro auth create rule --scope='*' --resource="*:*:*" onlyloggedin
 micro auth delete rule default
 ```
 
-### Run the M3O Services
+## Run the M3O Services
 
 Run the M3O services which make up the platform:
 ```bash
@@ -321,7 +331,7 @@ micro run github.com/m3o/services/notifications
 
 Wait for the services to all be running. This can be checked by running `micro services`
 
-### Configure Kubernetes Service
+## Configure Kubernetes Service
 
 The kubernetes service needs elevated privileges to create / list k8s namespaces. Firstly, create the RBAC resources by running:
 ```bash
