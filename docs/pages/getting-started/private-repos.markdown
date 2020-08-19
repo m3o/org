@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Private Repositories
+title: Private Repos
 nav_order: 1
-permalink: /private-repositories
+permalink: /getting-started/private-repos
 parent: Get Started
 ---
 
-# Using private repositories
+# Using Private Repos
 
 ## GitHub
 
@@ -35,4 +35,4 @@ Issue this command locally to save your personal access token to your local Micr
 micro user config set git.bitbucket.credential $bitbucket-username:$your-personal-access-token
 ```
 
-Please note the `username:accesstoken` requirement above which is different from the GitHub and Gitlab examples.
+Please note the `username:accesstoken` requirement above.
