@@ -14,7 +14,7 @@ parent: Get Started
 
 Issue this command locally to save your personal access token to your local Micro config:
 ```
-micro user config set git.github.credential $your-personal-access-token
+micro user config set git.github.credentials $your-personal-access-token
 ```
 
 ## GitLab
@@ -23,7 +23,7 @@ micro user config set git.github.credential $your-personal-access-token
 
 Issue this command locally to save your personal access token to your local Micro config:
 ```
-micro user config set git.gitlab.credential $your-personal-access-token
+micro user config set git.gitlab.credentials $your-personal-access-token
 ```
 
 ## Bitbucket
@@ -32,7 +32,7 @@ micro user config set git.gitlab.credential $your-personal-access-token
 
 Issue this command locally to save your personal access token to your local Micro config:
 ```
-micro user config set git.bitbucket.credential $bitbucket-username:$your-personal-access-token
+micro user config set git.bitbucket.credentials $bitbucket-username:$your-personal-access-token
 ```
 
 Please note the `username:accesstoken` requirement above which is different from the GitHub and Gitlab examples.
