@@ -15,7 +15,7 @@ Currently there is no password recovery functionality, please contact us on Slac
 
 ## Changing Your Password
 
-Use the following command to change password:
+Use the following command to change password (you must already be logged in):
 
 ```
 micro user set password
