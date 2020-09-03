@@ -13,6 +13,14 @@ permalink: /faq
 Issue `micro signup --recover --email=youremail` which will email you instructions on how to log in to namespaces you have access to.
 Currently there is no password recovery functionality, please contact us on Slack to do that.
 
+## Changing Your Password
+
+Use the following command to change password:
+
+```
+micro user set password
+```
+
 ## Additional Users
 
 You can add upto 5 additional users on the dev tier. Every additional user added to your account is billed at $35/month. Whether you invite 
