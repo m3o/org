@@ -22,14 +22,6 @@ toc_list: true
 
 ## Installation
 
-Using Go:
-
-```sh
-go get github.com/micro/micro/v3
-```
-
-Or by downloading the binary
-
 ```sh
 # MacOS
 curl -fsSL https://raw.githubusercontent.com/micro/micro/master/scripts/install.sh | /bin/bash
