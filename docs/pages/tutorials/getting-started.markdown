@@ -405,6 +405,8 @@ key: mykey, value: Hi there
 
 ## Config
 
+Note: this is a quick overview of config. For a more in depth look, please refer to the [config tutorial](https://m3o.dev/tutorials/config).
+
 Configuration and secrets is an essential part of any production system - let's see how the Micro config works.
 
 ### CLI
@@ -460,7 +462,8 @@ func main() {
 	srv.Init()
 
 	// read config value
-	fmt.Println("Value of key.subkey: ", config.Get("key", "subkey").String(""))
+	val, err := config.Get("key", "subkey")
+	fmt.Println("Value of key.subkey: ", val.String(""), err)
 }
 ```
 

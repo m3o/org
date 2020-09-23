@@ -87,10 +87,11 @@ $ curl -H "Micro-Namespace: $namespace" https://api.m3o.com/helloworld
 # Locally:
 # curl 127.0.0.1:8080/helloworld/call?name=Alice
 {"Id":"helloworld","Code":401,"Detail":"Unauthorized call made to helloworld:Helloworld.Call","Status":"Unauthorized"}
+```
 
 Great success! This means our `onlyloggedin` rule took effect. We can still call the service with a token:
 
-```
+```sh
 $ micro run helloworld
 $ token=$(micro user token)
 $ curl -H "Micro-Namespace: $namespace" "Authorization: Bearer $token"  https://api.m3o.com/helloworld
