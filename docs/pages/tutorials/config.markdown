@@ -106,3 +106,61 @@ $ micro config get helloworld
 # micro config get --secret helloworld
 {"hush_number_key":42,"hushkey":"Very secret stuff","someboolkey":true,"somekey":"hello"}
 ```
+
+## From Services
+
+It is simiarly easy to access and set config values from a service.
+A good example of reading values is [the config example test service](https://github.com/micro/micro/tree/master/test/service/config-example):
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+
+	"github.com/micro/micro/v3/service"
+	"github.com/micro/micro/v3/service/config"
+)
+
+type keyConfig struct {
+	Subkey  string `json:"subkey"`
+	Subkey1 int    `json:"subkey1"`
+}
+
+type conf struct {
+	Key keyConfig `json:"key"`
+}
+
+func main() {
+	go func() {
+		for {
+			time.Sleep(time.Second)
+			val, err := config.Get("key.subkey")
+			fmt.Println("Value of key.subkey: ", val.String(""), err)
+
+			val, err = config.Get("key", config.Secret(true))
+			if err != nil {
+				fmt.Println(err)
+			}
+			c := conf{}
+			err = val.Scan(&c.Key)
+			fmt.Println("Value of key.subkey1: ", c.Key.Subkey1, err)
+		}
+	}()
+
+	// run the service
+	service.Run()
+}
+```
+
+The above service will print the value of `key.subkey` and `key.subkey` every second.
+By passing in the `config.Secret(true)` option, we tell config to decrypt secret values for us, similarly to the `--secret` CLI flag.
+
+The [config interface](https://github.com/micro/go-micro/blob/master/config/config.go) specifies not just `Get` `Set` and `Delete` to access values,
+but a few convenience functions too in the `Value` interface.
+
+It is worth noting that `String` `Int` etc methods will do a best effort try at coercing types, ie. if the value saved is a string, `Int` will try to parse it.
+However, the same does not apply to the `Scan` method, which uses `json.Unmarshal` under the hood, which we all know fails when encountering type mismatches.
+
+`Get` should, in all cases, return a non nil `Value`, so even if the `Get` errors, `Value.Int()` and other operations should never panic.
