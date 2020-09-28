@@ -187,7 +187,7 @@ type conf struct {
 }
 
 c1 := conf{"val1", "val2"}
-config.Set("key", )
+config.Set("key", c1)
 
 v, _ := config.Get("key")
 c2 := &conf{}
