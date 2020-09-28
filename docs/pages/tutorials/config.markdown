@@ -164,3 +164,33 @@ It is worth noting that `String` `Int` etc methods will do a best effort try at 
 However, the same does not apply to the `Scan` method, which uses `json.Unmarshal` under the hood, which we all know fails when encountering type mismatches.
 
 `Get` should, in all cases, return a non nil `Value`, so even if the `Get` errors, `Value.Int()` and other operations should never panic.
+
+## Advanced Concepts
+
+### Merging Config Values
+
+When saving a string with the CLI that is a valid JSON map, it gets expanded to be saved as a proper map structure, instead of a string, ie
+
+```sh
+$ micro config set helloworld {"a": "val1", "b": "val2"}
+$ micro config get helloworld.a
+val1
+# If the string would be saved as is, `helloworld.a` would be a nonexistent path
+```
+
+The advantages of this become particularly visible when `Set`ting a complex type with the library:
+
+```go
+type conf struct {
+	A string `json:"a"`
+	B string `json:"b"`
+}
+
+c1 := conf{"val1", "val2"}
+config.Set("key", )
+
+v, _ := config.Get("key")
+c2 := &conf{}
+v.Scan(c2)
+// c1 and c2 should be equal
+```
