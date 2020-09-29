@@ -30,8 +30,10 @@ micro user config set git.credentials.github $your-personal-access-token
 
 Issue this command locally to save your personal access token to your local Micro config:
 ```
-micro user config set git.credentials.gitlab $your-personal-access-token
+micro user config set git.credentials.gitlab $gitlab-username:$your-personal-access-token
 ```
+
+Please note the `username` requirement above.
 
 ## Bitbucket
 
@@ -43,3 +45,13 @@ micro user config set git.credentials.bitbucket $bitbucket-username:$your-person
 ```
 
 Please note the `username` requirement above.
+
+## Git repos hosted on custom domains
+
+Many people have their own Gitlab etc. installations.
+To set up credentials in cases like that, do the following:
+
+```
+micro user git.credentials.url domain.com
+micro user git.credentials.token $username:$your-personal-access-token
+```
