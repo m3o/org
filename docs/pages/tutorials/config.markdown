@@ -172,7 +172,7 @@ However, the same does not apply to the `Scan` method, which uses `json.Unmarsha
 When saving a string with the CLI that is a valid JSON map, it gets expanded to be saved as a proper map structure, instead of a string, ie
 
 ```sh
-$ micro config set helloworld {"a": "val1", "b": "val2"}
+$ micro config set helloworld '{"a": "val1", "b": "val2"}'
 $ micro config get helloworld.a
 val1
 # If the string would be saved as is, `helloworld.a` would be a nonexistent path
@@ -193,4 +193,16 @@ v, _ := config.Get("key")
 c2 := &conf{}
 v.Scan(c2)
 // c1 and c2 should be equal
+```
+
+Or with the following example
+
+```sh
+$ micro config del helloworld
+$ micro config set helloworld '{"a":1}'
+$ micro config get helloworld
+{"a":1}
+$ micro config set helloworld '{"b":2}'
+$ micro config get helloworld
+{"a":1,"b":2}
 ```
