@@ -52,6 +52,6 @@ Many people have their own Gitlab etc. installations.
 To set up credentials in cases like that, do the following:
 
 ```
-micro user git.credentials.url domain.com
-micro user git.credentials.token $username:$your-personal-access-token
+micro user config set git.credentials.url domain.com
+micro user config set git.credentials.token $username:$your-personal-access-token
 ```
