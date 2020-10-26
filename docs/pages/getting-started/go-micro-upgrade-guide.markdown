@@ -10,7 +10,7 @@ parent: Get Started
 
 ## Introduction
 
-Users of the now depricated [go-micro](https://github.com/asim/go-micro) framework can follow this guide to upgrade their projects to use Micro v3 and benefit from all the new features which come in the latest version.
+Users of the now deprecated [go-micro](https://github.com/asim/go-micro) framework can follow this guide to upgrade their projects to use Micro v3 and benefit from all the new features which come in the latest version.
 
 ## Service
 
