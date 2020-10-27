@@ -23,13 +23,18 @@ Team day 1 onboarding requirements:
 
 - Add to Gmail
 - Add to Slack
-- Add to Cloud {DO, GCP, ...}
+- Add to Cloud {Scaleway, DO, GCP, ...}
 - Add to GitHub
 - Add to DockerHub
+- Add to 1Password
+- Add to Stripe
+- Add admin accounts for dev and platform tiers of m3o
+- Add to Cloudflare
+- Add to Linear
 
 ## Schedule Calls
 
-Reach out to each team member and schedule 1:1 calls to get to know colleagues
+Reach out to each team member and schedule 1:1 calls to get to know colleagues. Add to regular team calls.
 
 ## Setup Environment
 

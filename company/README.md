@@ -16,3 +16,4 @@ This directory contains company related docs
 - [roadmap](../roadmap) - where the full roadmap lives
 - [consensus](consensus.md) - how to make decisions
 - [vision](vision.md) - vision distillation
+- [release process](release-process.md) - how we cut new releases
