@@ -77,24 +77,24 @@ not exclude those who want to self host and access the system as if it were part
 
 ### Further breakdown
 
-- [ ] **Platform** {Micro Server, Proxy, Runtime, Sync, Network}
+- [x] **Platform** {Micro Server, Proxy, Runtime, Sync, Network}
   * Evolve the platform => build, run, manage
   * Establish go-micro as micro server
   * Enable connectivity beyond the cloud
   * Continue development of core services
-  - [ ] **Namespaces**
+- [x] **Namespaces**
   * Namespacing services for separate teams
   * Owner/group baked in at runtime
   * Controlled ability to expose on per service basis
+- [ ] **Billing**
+  * Usage tracking
+  * Accounts and payments
+  * Subscriptions
 - [ ] **Debugging** {Logging, tracing, metrics}
   * Build in observability features
   * Runtime stats; cpu, mem, threads, requests, errors
   * Logs; historic logs for a finite time
   * Distributed tracing for the call graph
-- [ ] **Billing**
-  * Usage tracking
-  * Accounts and payments
-  * Subscriptions
 - [ ] **Access Control**
   * Team based access control
   * User / Service / Admin scopes
