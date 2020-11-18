@@ -38,6 +38,7 @@ External entrypoints also within the micro server
 - [ ] **Chat** - Slackbot for ChatOps
 - [ ] **Web** - Web dashboard and proxy for web apps as microservices
 - [ ] **Voice** - Ok Google, Siri, integration for voice commands
+- [ ] **Mobile** - On mobile using Flutter, equivalent of Web
 
 ## Services
 
