@@ -57,7 +57,7 @@ We have the following high level goals:
 
 Beyond the MVP we want to move into focusing on extending the platform, including team based collaboration and private hosting.
 
-- [ ] Privately hosted Micro platform
+- [x] Privately hosted Micro platform
 - [ ] Team based features and access control
 - [ ] Paid personal and team subscription
 - [ ] Value add services beyond the runtime
