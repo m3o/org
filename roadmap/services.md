@@ -35,7 +35,7 @@ External entrypoints also within the micro server
 - [x] **API** - API gateway for http/json api construction
 - [x] **CLI** - Terminal command line interface
 - [x] **Proxy** - Service to service and external proxying to services
-- [ ] **Slack** - Slackbot for ChatOps
+- [ ] **Chat** - Slackbot for ChatOps
 - [ ] **Web** - Web dashboard and proxy for web apps as microservices
 - [ ] **Voice** - Ok Google, Siri, integration for voice commands
 
