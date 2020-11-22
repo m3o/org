@@ -16,5 +16,5 @@ This directory contains company related docs
 - [product](../product) - product outlines, specs, etc
 - [roadmap](../roadmap) - where the full roadmap lives
 - [consensus](consensus.md) - how to make decisions
-- [vision](vision.md) - The company and product vision
+- [vision](vision.md) - the company and product vision
 - [release process](release-process.md) - how we cut new releases
