@@ -1,6 +1,6 @@
 # Organisation
 
-The Micro company handbook, development roadmap, team and contribution guide.
+The Micro company handbook, product roadmap, team and contribution guide.
 
 # Overview 
 
