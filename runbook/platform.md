@@ -6,6 +6,8 @@ This is the runbook for the M3O platform and should act as an operations manual 
    * [Users](#users)
       * [Add new user to beta](#add-new-user-to-beta)
       * [User deleted their account](#user-deleted-their-account)
+      * [Cancel a user's subscription (paid tier)](#cancel-a-users-subscription-paid-tier)
+      * [Cancel a user's account (free tier)](#cancel-a-users-account-free-tier)
    * [Services](#services)
       * [Redeploying services](#redeploying-services)
          * [Micro (Server)](#micro-server)
@@ -36,7 +38,7 @@ This is the runbook for the M3O platform and should act as an operations manual 
       * [Tag owners for namespaces](#tag-owners-for-namespaces)
       * [Set up the Cockroach backups](#set-up-the-cockroach-backups)
 
-<!-- Added by: domwong, at: Thu 22 Oct 2020 16:25:07 BST -->
+<!-- Added by: domwong, at: Tue 10 Nov 2020 17:27:45 GMT -->
 
 <!--te-->
 To regenerate the table of contents, use [this tool](https://github.com/ekalinin/github-markdown-toc) and do `gh-md-toc --insert platform.md`
@@ -65,6 +67,52 @@ micro call auth Auth.Generate '{"id":"<email address>" , "type":"user" , "option
 ```
 
 Send details to user via DM. Create a one time message in privnote to give them the password (https://privnote.com/). Also, ask the user to change their password once they've successfully logged in https://m3o.dev/faq#changing-your-password
+
+## Cancel a user's subscription (paid tier)
+If a user wants us to cancel their paid account we can do the following. First confirm their email address so you can look up their customer ID
+
+```
+$ micro customers read --email=foo@bar.com
+{
+	"customer": {
+		"id": "841d621c-794d-4472-b393-8ff73c803def",
+		"status": "active",
+		"created": "1603980254",
+		"email": "foo@bar.com",
+		"updated": "1603980326"
+	}
+}
+```
+
+Take the customer ID from the response and cancel the subscription
+```
+$ micro subscriptions cancel --customerID=<CUSTOMER_ID>
+{}
+```
+
+This will also delete the customer, namespaces etc.
+
+## Cancel a user's account (free tier)
+If a user wants us to cancel their free account we can do the following. First confirm their email address so you can look up their customer ID
+
+```
+$ micro customers read --email=foo@bar.com
+{
+	"customer": {
+		"id": "841d621c-794d-4472-b393-8ff73c803def",
+		"status": "active",
+		"created": "1603980254",
+		"email": "foo@bar.com",
+		"updated": "1603980326"
+	}
+}
+```
+
+Take the customer ID from the response and delete the customer
+```
+$ micro customers delete --id=<CUSTOMER_ID>
+{}
+```
 
 # Services
 
@@ -96,7 +144,7 @@ nats-operator    1/1     1            1           4d14h
 ```
 
 ```
-kubectl set image deployments micro=micro/platform:<INSERT_TAG_NAME_HERE> -l micro=runtime
+kubectl set image deployments micro=ghcr.io/m3o/platform:<INSERT_TAG_NAME_HERE> -l micro=runtime
 ```
 
 Where `<INSERT_TAG_NAME_HERE>` is your container image tag.
@@ -247,7 +295,7 @@ Wait for all the pods to be “Running”.
 Update micro to the latest stable docker image snapshot using the following command and then wait for the services to all have the status "Running".
 
 ```bash
-kubectl set image deployments micro=micro/platform:tag -l micro=runtime
+kubectl set image deployments micro=ghcr.io/m3o/platform:tag -l micro=runtime
 ```
 
 ## Update DNS

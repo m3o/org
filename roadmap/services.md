@@ -33,11 +33,12 @@ Services provided by the core runtime
 External entrypoints also within the micro server
 
 - [x] **API** - API gateway for http/json api construction
-- [ ] **Web** - Web dashboard and proxy for web apps as microservices
 - [x] **CLI** - Terminal command line interface
-- [ ] **Bot** - Slackbot for ChatOps
 - [x] **Proxy** - Service to service and external proxying to services
+- [ ] **Chat** - Slackbot for ChatOps
+- [ ] **Web** - Web dashboard and proxy for web apps as microservices
 - [ ] **Voice** - Ok Google, Siri, integration for voice commands
+- [ ] **Mobile** - On mobile using Flutter, equivalent of Web
 
 ## Services
 

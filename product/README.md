@@ -17,3 +17,4 @@ Before a feature can be worked on we will:
 
 - [M3O Product](https://docs.google.com/document/d/1nUXE397sNeqyj6vcauxjt_lMYUISgMjVGc1m84v_BVY/edit) - outline of the main product
 - [M3O Positioning](https://docs.google.com/document/d/1_7nZJgCZp71Q10fNC_4gjM4syN8lQML5HKr2hccYhDY/edit#) - positioning in relation to the product
+- [M3O Pricing](https://docs.google.com/document/d/1KcE3LSkmqDZwqI4GMpnTaj4F8fTnYijpNPn2y0Ucmc0/edit) - pricing model and services

@@ -57,7 +57,7 @@ We have the following high level goals:
 
 Beyond the MVP we want to move into focusing on extending the platform, including team based collaboration and private hosting.
 
-- [ ] Privately hosted Micro platform
+- [x] Privately hosted Micro platform
 - [ ] Team based features and access control
 - [ ] Paid personal and team subscription
 - [ ] Value add services beyond the runtime
@@ -77,40 +77,31 @@ not exclude those who want to self host and access the system as if it were part
 
 ### Further breakdown
 
-- [ ] **Multi-Cloud**
-  * Run on DO, AWS, Azure, GCP
-- [ ] **Network** {Micro Services Network}
-  * Global service network
-  * Shared system for building microservices
-- [ ] **Platform** {Micro Server, Proxy, Runtime, Sync, Network}
+- [x] **Platform** {Micro Server, Proxy, Runtime, Sync, Network}
   * Evolve the platform => build, run, manage
   * Establish go-micro as micro server
   * Enable connectivity beyond the cloud
   * Continue development of core services
+- [x] **Namespaces**
+  * Namespacing services for separate teams
+  * Owner/group baked in at runtime
+  * Controlled ability to expose on per service basis
+- [ ] **Billing**
+  * Usage tracking
+  * Accounts and payments
+  * Subscriptions
 - [ ] **Debugging** {Logging, tracing, metrics}
   * Build in observability features
   * Runtime stats; cpu, mem, threads, requests, errors
   * Logs; historic logs for a finite time
   * Distributed tracing for the call graph
-- [ ] **Billing**
-  * Usage tracking
-  * Accounts and payments
-  * Subscriptions
 - [ ] **Access Control**
   * Team based access control
   * User / Service / Admin scopes
-- [ ] **Namespaces**
-  * Namespacing services for separate teams
-  * Owner/group baked in at runtime
-  * Controlled ability to expose on per service basis
 - [ ] **Routing**
   * Label based routing (Micro-X Headers route via metadata)
   * URL Versioning routes to service versions
   * Per web app sub domains
-- [ ] **Services** {Platform, Utility, Orchestration, Web}
-  * Continue key service development to 30+ services
-- [ ] **Clients** {Go, Python, Ruby, Javascript}
-  * Enable multi-language through micro server + grpc
 - [ ] **Monitoring / Alerting**
   * Monitoring of services
   * Ability to define healthchecks
@@ -118,11 +109,22 @@ not exclude those who want to self host and access the system as if it were part
   * Scheduling of on-call (stretch goal 6-12 months)
 - [x] **Commands**
   * Auto generate CLI commands based on available services
- - [ ] **Multi-Lang Apps**
+- [ ] **Services** {Platform, Utility, Orchestration, Web}
+  * Continue key service development to 30+ services
+- [ ] **Clients** {Go, Python, Ruby, Javascript}
+  * Enable multi-language through micro server + grpc
+- [ ] **Multi-Cloud**
+  * Run on DO, AWS, Azure, GCP
+- [ ] **Multi-Network** {Micro Services Network}
+  * Global services network
+  * Shared system for building microservices
+  * Micro Servers connecting to form network
+- [ ] **Multi-Lang Apps**
   * Add additional languages (rust, java, etc}
   * Concept of 'cells' to encapsulate code in containers
   * Use 'micro service' command to turn into a service
 - [ ] **Mu spec**
   * Flesh out the mu spec for single file definition
   * Move beyond proto and go
+  * DSL for orchestration
 
