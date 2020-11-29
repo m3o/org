@@ -6,6 +6,7 @@ This directory contains company related docs
 
 - [collaboration](collaboration.md) - the tools we use or will use for collaboration
 - [culture](culture.md) - a small piece about culture
+- [development](development.md) - a simple guide to how we work and build software
 - [environments](environments.md) - details our environments and architecture
 - [evolution](evolution.md) - on the evolution of micro
 - [glossary](../glossary.md) - a glossary of terms and explanation of brand, company, project, product
