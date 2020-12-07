@@ -43,6 +43,17 @@ Getting the clients to also submit spans can give us a very good picture of what
 - Namespace?
 
 
+APM
+---
+
+RPC is not where tracing ends however. It would be fascinating to have insight to other aspects of application / platform performance, and as we are in control of the framework we're in a good position to be able to do that. Given that we already have access to the tracing context we should be able to trace such things as:
+
+- DB queries (in the store service)
+- Pub/sub timings in the broker
+
+By providing our users access to the OpenTracing (OpenTelemetry) headers they could then pass them on to other 3rd party libraries which support those too.
+
+
 Toolkit
 -------
 
