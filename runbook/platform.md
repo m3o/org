@@ -3,6 +3,8 @@
 This is the runbook for the M3O platform and should act as an operations manual for things like outages etc.  
 <!--ts-->
    * [Platform Runbook](#platform-runbook)
+   * [Namespaces](#namespaces)
+      * [Creating a new namespace](#creating-a-new-namespace)
    * [Users](#users)
       * [Add new user to beta](#add-new-user-to-beta)
       * [User deleted their account](#user-deleted-their-account)
@@ -42,6 +44,20 @@ This is the runbook for the M3O platform and should act as an operations manual 
 
 <!--te-->
 To regenerate the table of contents, use [this tool](https://github.com/ekalinin/github-markdown-toc) and do `gh-md-toc --insert platform.md`
+
+# Namespaces
+
+## Creating a new namespace
+
+A quick way to create a new namespace
+
+```
+micro auth create account --namespace=foobar --secret=secret john
+micro platform createNamespace --name=foobar
+micro user namespace set foobar
+micro login
+```
+
 # Users
 
 ## Add new user to beta
