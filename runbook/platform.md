@@ -49,7 +49,7 @@ To regenerate the table of contents, use [this tool](https://github.com/ekalinin
 
 ## Creating a new namespace
 
-A quick way to create a new namespace
+A quick way to create a new namespace without a customer account
 
 ```
 micro auth create account --namespace=foobar --secret=secret john
