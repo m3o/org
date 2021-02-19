@@ -405,10 +405,13 @@ Verify the config by calling`“micro config get micro`. This will output the co
 
 Setup the auth rules to restrict access to the m3o services before we deploy them:
 ```bash
-micro auth create rule --resource="service:alert:*" alert
-micro auth create rule --resource="service:status:*" status
-micro auth create rule --resource="service:auth:*" auth
-micro auth create rule --resource="service:signup:*" signup
+micro auth create rule --resource="service:alert:*" --priority 1 alert
+micro auth create rule --resource="service:status:*" --priority 1 status
+micro auth create rule --resource="service:auth:*" --priority 1 auth
+micro auth create rule --resource="service:signup:*" --priority 1 signup
+micro auth create rule --resource="service:runtime:*" --priority 1 runtime-public
+micro auth create rule --resource="service:registry:*" --priority 1 registry-public
+micro auth create rule --resource="service:store:*" --priority 1 store-public
 micro auth create rule --scope='*' --resource="*:*:*" onlyloggedin
 micro auth delete rule default
 ```
