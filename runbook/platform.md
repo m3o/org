@@ -164,6 +164,7 @@ kubectl set image deployments micro=ghcr.io/m3o/platform:<INSERT_TAG_NAME_HERE> 
 ```
 
 Where `<INSERT_TAG_NAME_HERE>` is your container image tag.
+Get that from here https://github.com/orgs/m3o/packages.
 
 ### M3O (Runtime Services)
 
