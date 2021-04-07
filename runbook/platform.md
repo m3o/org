@@ -39,6 +39,9 @@ This is the runbook for the M3O platform and should act as an operations manual 
       * [Run the M3O Services](#run-the-m3o-services)
       * [Tag owners for namespaces](#tag-owners-for-namespaces)
       * [Set up the Cockroach backups](#set-up-the-cockroach-backups)
+   * [Troubleshooting](#troubleshooting)
+      * [Alerts about certificate expiry](#alerts-about-certificate-expiry)
+
 
 <!-- Added by: domwong, at: Tue 10 Nov 2020 17:27:45 GMT -->
 
@@ -452,3 +455,38 @@ kubectl edit namespace micro
 
 ## Set up the Cockroach backups
 See [previous section](#backups)
+
+# Troubleshooting
+
+## Alerts about certificate expiry
+
+If you see regular alerts about in Slack about certificate expiry e.g. `[FIRING:1] CertManagerCertExpirySoon` it might be because cert-manager is having issues renewing the cert. All certs should auto renew so if they don't we have a problem. Check the logs for the `cert-manager` pod
+
+```
+stern -n cert-manager certmanager-cert-manager-767dbf6fdb-6tfz2
+```
+
+and you might see an error like
+
+```
+certmanager-cert-manager-767dbf6fdb-6tfz2 cert-manager E0407 14:20:45.149593       1 controller.go:158] cert-manager/controller/CertificateKeyManager "msg"="re-queuing item  due to error processing" "error"="Operation cannot be fulfilled on certificates.cert-manager.io \"tls-api\": the object has been modified; please apply your changes to the latest version and try again" "key"="server/tls-api" 
+```
+
+If this keeps occurring you may have to delete and recreate the certificate object. Save the existing certificate
+
+```
+k get certificate -n server tls-api --export -o yaml > cert-tls-api.yaml
+```
+
+Then delete it from k8s
+
+```
+ k delete certificate -n server tls-api  
+```
+
+Then recreate it, which will force cert-manager to try and reissue it
+
+```
+k apply -f cert-tls-api.yaml -n server  
+```
+
