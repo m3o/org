@@ -27,7 +27,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: m3ocloud
 github_username:  m3o
 #google_analytics: ""
-logo: "/images/logo.png"
+#logo: "/images/logo.png"
 
 # Pagination
 paginate: 15
