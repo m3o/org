@@ -1,4 +1,4 @@
-# Organisation Docs
+# Org Docs
 
 The Micro company handbook, product roadmap, team and contribution guide.
 
