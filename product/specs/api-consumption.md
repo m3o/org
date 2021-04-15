@@ -1,6 +1,6 @@
 # API consumption
 
-
+Thoughts on what is needed to refocus to an API consumption model.
 
 ## Scenarios
 
@@ -70,6 +70,32 @@ Integration similar to our own so builders can offer APIs for other users to use
    - Ability to charge / earn money
    - URL for use would probably change to https://api.m3o.com/v1/service/call so we can use v1api and quota service to do the accounting but need to work out how to route that back to the builder's namespace.
 
+
+## Pricing
+Pricing is complex and could be done in a multitude of different ways. We can start off with a simple model and adapt as we go along. For any pricing model, the fundamental data point we need to capture is the number of requests made to a particular API. We do this currently in the quota service which ticks up a redis counter. 
+
+### Pay as you go
+The pay as you go pricing model keeps it simple by asking users to top up their balance which gets decremented with usage. We will maintain a single balance for a user which is then used against all API usage e.g. using the geocoding API and the users API will decrement the same pot of money.
+
+For now, to keep it simple, every API will have a flat rate i.e. no tiered pricing just Xp/request where X could be 0 (unlikely case where someone wants to offer a free API) or even fractional (where you want to charge 1p per 100 requests or similar).
+
+### Free trial
+If we want to enable a "free trial" model the easiest thing would be to give each user free credit, say £3, which would be enough for a few hundred requests.
+
+## Accounting 
+Count API usage to correctly debit account. 
+When balance hits zero their service should stop.
+
+User adds money in stripe -> inbound webhook -> update 
+User uses API -> balance service counts -> if counter hits zero, block at the v1api 
+Use redis counter to do distributed counting and maintain a running balance
+
+if redis fails it has a backup
+
+## Users
+API consumers signup and are given an account in the `micro` namespace with type `customer` and role `customer`. 
+
+API builders signup and are given an account in their `micro`namespace with type `developer` and role `developer`. They will be given a namespace with a separate admin account (similar to what they have in the current model). Scope to extend and give builders multiple namespaces (AKA projects). Remove signup from CLI.
 
 ## Outstanding questions
 Should we support a Sandbox env (similar to Stripe) for testing APIs before moving on to the paid stuff? 
