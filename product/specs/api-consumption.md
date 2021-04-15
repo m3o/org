@@ -97,6 +97,14 @@ API consumers signup and are given an account in the `micro` namespace with type
 
 API builders signup and are given an account in their `micro`namespace with type `developer` and role `developer`. They will be given a namespace with a separate admin account (similar to what they have in the current model). Scope to extend and give builders multiple namespaces (AKA projects). Remove signup from CLI.
 
+## API publishing
+An API is defined by a combination of 
+- OpenAPI spec (JSON)
+- Description
+- Pricing
+
+To "publish" an API we expect at least the above pieces of information. This is different to the backend service definition approach we currently take with protobufs. This is intentional; considering that Swagger/OpenAPI is fast becoming the industry standard for API specs it makes sense to adopt it. The tooling for open API UIs etc is also much better than hand crafting something. We will continue to use protobufs to define backend interprocess communication, indeed you can even generate protos from the openapi spec if you need. 
+
 ## Outstanding questions
 Should we support a Sandbox env (similar to Stripe) for testing APIs before moving on to the paid stuff? 
 
