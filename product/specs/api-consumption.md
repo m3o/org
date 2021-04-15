@@ -95,7 +95,7 @@ if redis fails it has a backup
 ## Users
 API consumers signup and are given an account in the `micro` namespace with type `customer` and role `customer`. 
 
-API builders signup and are given an account in their `micro`namespace with type `developer` and role `developer`. They will be given a namespace with a separate admin account (similar to what they have in the current model). Scope to extend and give builders multiple namespaces (AKA projects). Remove signup from CLI.
+API builders signup and are given an account in the `micro` namespace with type `developer` and role `developer`. They will be given a namespace with a separate admin account (similar to what they have in the current model). Scope to extend and give builders multiple namespaces (AKA projects). Remove signup from CLI.
 
 ## API publishing
 An API is defined by a combination of 
