@@ -9,7 +9,7 @@ We use https://github.com projects to manage a [public roadmap](https://github.c
 We loosely follow the Scrum methodology and pick and choose ceremonies as appropriate. As we grow in size we will no doubt adopt more and apply them more rigorously. 
 
 ### Standups
-We don't do daily standups, rather, every morning at 10am we post our standup update in to the #team-important channel in Slack. We post what we did yesterday, what we plan to do today, and any blockers we may have. 
+We do daily standups every morning at 9.30am (except Mondays). We discuss what we did yesterday, what we plan to do today, and any blockers we may have. 
 
 ### Sprint cadence
 We run 2 week sprints. Work is identified for the sprint at the beginning of the period to fill the two weeks but not overspill. If a piece of work is scoped to last longer than a sprint then it is too big and should be scoped in to smaller chunks. If we run out of work then we can either pull in additional work that will fit in to the remaining time left in the sprint or we can work on bug fixes or "20% time" type work.
