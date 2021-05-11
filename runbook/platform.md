@@ -166,6 +166,8 @@ nats-operator    1/1     1            1           4d14h
 kubectl set image deployments micro=ghcr.io/m3o/platform:<INSERT_TAG_NAME_HERE> -l micro=server -n server
 ```
 
+To add a single single service, use the `-l name=store` flag.
+
 Where `<INSERT_TAG_NAME_HERE>` is your container image tag.
 Get that from here https://github.com/orgs/m3o/packages.
 
