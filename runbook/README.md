@@ -10,3 +10,4 @@ We maintain one flat runbook for the [Platform](platform.md). Other runbooks may
 ## Contents
 
 - [Platform](platform.md) - The platform runbook
+- [Public API](publicapi.md) - Details for the public api
